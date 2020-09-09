@@ -55,7 +55,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const signOut = useCallback(() => {
     localStorage.removeItem('@Gobarber:token');
     localStorage.removeItem('@Gobarber:user');
-    return {} as AuthState;
+    setData({} as AuthState);
   }, []);
 
   const updateUser = useCallback(
@@ -79,12 +79,7 @@ const AuthProvider: React.FC = ({ children }) => {
 };
 
 function useAuth(): AuthContextDTO {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-
-  return context;
+  return useContext(AuthContext);
 }
 
 export { AuthProvider, useAuth };
